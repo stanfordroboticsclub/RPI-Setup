@@ -74,33 +74,10 @@ func copyAppliance(path string, info os.FileInfo, err error) error {
 }
 
 func main() {
-
-	exists := []syscall.Errno{syscall.EEXIST};
-
 	checkFatal("changing directory", 
 		unix.Chdir("/"))
 	checkFatal("remount rw", 
 		unix.Mount("/","/","vfat", syscall.MS_REMOUNT, ""), )
-	checkFatalAllowed(
-		"making tmp", 
-		unix.Mkdir("tmp", 0770),
-		exists)
-	checkFatalAllowed(
-		"making new_root", unix.Mkdir("new_root", 0770), exists)
-	checkFatal("mounting tmp", 
-		unix.Mount("", "tmp", "tmpfs", 0, ""))
-	checkFatal("create device node", 
-		unix.Mknod("tmp/mmcblk0p2", 0660 | syscall.S_IFBLK, 179<<8 | 2))
-	checkFatal("mounting real root", 
-		unix.Mount("tmp/mmcblk0p2", "new_root", "ext4", 0, ""))
-	checkFatal("pivoting", 
-		unix.PivotRoot("new_root", "new_root/boot"))
-	checkFatal("unmounting /boot/tmp", 
-		unix.Unmount("/boot/tmp", 0))
-	checkFatal("Removing /boot/tmp", 
-		os.Remove("/boot/new_root"))
-	checkFatal("Removing /boot/new_root", 
-		os.Remove("/boot/tmp"))
 	checkFatal("changing into appliance directory",
 		unix.Chdir("/boot/appliance"))
 	checkFatal("copying appliance to root",
