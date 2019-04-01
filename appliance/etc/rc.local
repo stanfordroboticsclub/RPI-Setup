@@ -17,6 +17,8 @@ if [ "$_IP" ]; then
   printf "My IP address is %s\n" "$_IP"
 fi
 
+sudo bash /home/pi/btserial.sh
+
 if [ -f /boot/TODO_ro ]; then
     sudo bash /home/pi/read-only-fs.sh
 fi
