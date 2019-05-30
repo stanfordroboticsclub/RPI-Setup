@@ -36,25 +36,11 @@ read -p 'Enter the current date [YYYY-MM-DD HH:MM] or hit enter to skip: ' datet
 sudo apt update
 sudo apt install -y git vim screen python3-pip python-pip
 
-yes | sudo pip3 install ipython
-yes | sudo pip install ipython
-
 #### UDPCOMMS
 git clone https://github.com/stanfordroboticsclub/UDPComms.git
 sudo bash UDPComms/install.sh
 
-#### uDHCPd
-git clone https://github.com/stanfordroboticsclub/uDHCPd.git
-sudo bash uDHCPd/install.sh
-
-#### ODRIVE
-git clone https://github.com/stanfordroboticsclub/RoverODrive.git
-sudo bash RoverODrive/install.sh
-
 #### COMMAND
-git clone https://github.com/stanfordroboticsclub/RoverCommand.git
-sudo bash RoverCommand/install.sh
+git clone https://github.com/stanfordroboticsclub/RoverCam.git
+sudo bash RoverCam/install.sh
 
-#### GPS
-git clone https://github.com/stanfordroboticsclub/RoverGPS.git
-sudo bash RoverGPS/install.sh
